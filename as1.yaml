@@ -1,0 +1,68 @@
+name: as1
+sha1: 34201158cc8f329ad3741f42b419e34cd76ebb11
+options:
+  basename: as1
+  target_path: as1
+  base_path: .
+  compiler: IDO
+  find_file_boundaries: True
+  platform: n64
+  # undefined_funcs_auto_path: undefined_funcs_auto.txt
+  # undefined_syms_auto_path: undefined_syms_auto.txt
+  # symbol_addrs_path: symbol_addrs.txt
+  # undefined_syms_path: undefined_syms.txt
+  # asm_path: asm
+  src_path: src
+  build_path: build
+  # extensions_path: tools/splat_ext
+  # auto_all_sections: True
+
+segments:
+  - name: header
+    type: header
+    start: 0x0
+  - name: boot
+    type: bin
+    start: 0x40
+  - name: main
+    type: code
+    start: 0xCF2C
+    subsegments:
+    - [0xCF2C, c]
+  - name: endBin
+    type: bin
+    start: 0x9A470
+# segments:
+#   - name: header
+#     type: header
+#     start: 0x0
+#   - name: rodataStrings1
+#     type: rodata
+#     start: 0x300
+#     subsegments:
+#     - [0x300, rodata]
+#   - name: data2
+#     type: code
+#     start: 0x3310
+#     subsegments:
+#       - [0x3310, bin]
+#   - name: main
+#     type: code
+#     start: 0xCF2C
+#     subsegments:
+#       - [0xCF2C, c]
+#   - type: bin
+#     start: 0x9A470
+
+#CF2C starts .text
+#0 - 0x300 just bin
+#0x300 some type of new data
+#0x300 - 0x3310 rodata strings
+#0x3310 begins some new data
+
+
+#9A470 ends .text section
+#0x9A4A0 has random JR RA?
+#0x9B000 starts rodata strings
+#0x9C778 starts new data, unk data?
+#0x9CA60 more rodata strings

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ ! -f "as1" ]]; then
+    echo "Error: as1 not found in current directory"
+    exit 1
+fi
+
+expected_hash="34201158cc8f329ad3741f42b419e34cd76ebb11"
+actual_hash=$(sha1sum as1 | awk '{ print $1 }')
+
+if [[ "$actual_hash" != "$expected_hash" ]]; then
+    echo "Error: as1 has an invalid SHA1 hash"
+    exit 1
+fi
+
+spimdisasm elfObjDisasm --no-emit-cpload --split-functions asm/nonmatchings as1 temp
+python3 configure.py "$@"
